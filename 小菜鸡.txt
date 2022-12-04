@@ -1,0 +1,61 @@
+int Index(char str1[], char str2[], int n, int m)
+{
+	int i = 0;//记录当前匹配到的位置
+	int j = 0;
+	while (str1[i] != '\0')
+	{
+		if (n - i < m)//主串当前字符后的字符长度小于子串的长度则判定匹配失败
+		{
+			return -1;
+			break;
+		}
+		else if (str1[i] == str2[j])//如果匹配成功，继续匹配下一个字符
+		{
+			i++;
+			j++;
+			if (str2[j] == '\0')
+			{
+				return i;
+				break;
+			}
+		}
+		else if (str1[i] != str2[j])//当第一个字符匹配失败时，主串后移，子串从新开始
+		{
+			j = 0;
+			i++;
+		}
+	}
+}
+int Delete(int str1[], int n,int a, int b)//删除操作
+{
+	int i;
+	for (i = a; i < n; i++)
+	{
+		str1[i] = str1[i + a + b];
+
+	}
+	return 0;
+}
+int main()
+{
+	int n, m, i;
+	char S[100] = "新手第一次写编程";
+	printf("%s\n", S);
+	char T[] = "一";
+	n = strlen(S);
+	m = strlen(T);
+	i = Index(S, T, n, m);
+	if (i == -1)
+		printf("匹配失败");
+	else if (i > 1)
+	{
+		printf("匹配成功\n");
+		printf("%d\n", i - m);//返回初始位置，用匹配成功的返回值减去子串的长度
+	};
+	int a, b;
+	printf("从第a个位置删除b个元素\n");
+	scanf("%d%d", &a, &b);
+	Delete(S, n, a, b);
+	printf("%s", S);
+	return 0;
+}
