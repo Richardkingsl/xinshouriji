@@ -1,1 +1,1 @@
-# xinshouriji
+# novice
